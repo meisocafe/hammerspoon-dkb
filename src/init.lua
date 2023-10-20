@@ -1,0 +1,12 @@
+---
+-- Declarative KeyBindings for Hammerspoon
+-- A framework to declare keybindings in a concise and readable way.
+-- This framework priorizes usage readability and ease of use over internal 
+-- code readability. 
+-- This framework barely gives any additional functionality over the hammerspoon's
+-- modules. It just presents an interface to them in a very opinionated way.
+-- At the same time, dkb currently does not support all the functionality
+-- provided by hammerspoon. However, because of it's small codebase, it
+-- easily extensible or customizable. Please feel free to fork it or 
+-- add new features through PRs.
+-- @module dkb
