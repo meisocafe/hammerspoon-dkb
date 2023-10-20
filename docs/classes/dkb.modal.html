@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Declarative Keybindings for Hammerspoon Documentation</title>
+    <link rel="stylesheet" href="../ldoc_fixed.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Declarative Keybindings</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><strong>dkb.modal</strong></li>
+  <li><a href="../classes/dkb.toast.html">dkb.toast</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/dkb.html">dkb</a></li>
+  <li><a href="../modules/dkb.exec.html">dkb.exec</a></li>
+  <li><a href="../modules/dkb.keybindings.html">dkb.keybindings</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>dkb.modal</code></h1>
+<p>Class to bind keys within modals.</p>
+<p> Uses <code>hs.hotkey.modal</code> behind the scenes.
+ Use it in combination with <a href="../modules/dkb.keybindings.html#">dkb.keybindings</a> to easily define modals and bind keys
+ to them.</p>
+
+<p> This module returns a <code>func</code> used to instantiate modals. See usage in the function below.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#dkb.modal">dkb.modal (init_function)</a></td>
+	<td class="summary">Function returned by this module when imported.</td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#dkb.modal:enter">dkb.modal:enter (action)</a></td>
+	<td class="summary">Enter modal.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dkb.modal:exit">dkb.modal:exit (action)</a></td>
+	<td class="summary">Exit modal.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#dkb.modal:exit">dkb.modal:exit (func, arg)</a></td>
+	<td class="summary">Execute a function with bind mode enabled.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    Methods
+    <dl class="function">
+    <dt>
+    <a name = "dkb.modal"></a>
+    <strong>dkb.modal (init_function)</strong>
+    </dt>
+    <dd>
+    Function returned by this module when imported.  Used to create Modal instances.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">init_function</span>
+            <span class="types"><span class="type">func[opt]</span></span>
+         The provied function will be executed on modal creation.
+ Keybindings inside the function will map to the modal.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/dkb.keybindings.html#">dkb.keybindings</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> Modal = <span class="global">require</span>(<span class="string">"dkb.modal"</span>) <span class="comment">--&gt; Import class
+</span>
+<span class="keyword">local</span> test_modal = <span class="function-name">Modal</span>(<span class="keyword">function</span>(modal) <span class="comment">--&gt; Define new modal
+</span>    <span class="comment">-- Actions will be mapped only when the modal is active
+</span>    <span class="function-name">mod1</span>(<span class="string">"p"</span>, <span class="global">print</span>, <span class="string">"printing from inside modal!"</span>)
+    <span class="comment">-- Action to exit modal
+</span>    <span class="function-name">mod1</span>(<span class="string">"s"</span>, modal.exit, <span class="keyword">function</span>(modal) <span class="global">print</span>(<span class="string">"exit test modal"</span>) <span class="keyword">end</span>)
+<span class="keyword">end</span>)
+
+<span class="comment">-- Map action to enter modal
+</span><span class="function-name">mod1</span>(<span class="string">"s"</span>, stack_modal.enter, <span class="keyword">function</span>(modal) <span class="global">print</span>(<span class="string">"enter modal"</span>) <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "dkb.modal:enter"></a>
+    <strong>dkb.modal:enter (action)</strong>
+    </dt>
+    <dd>
+    Enter modal.  Activates it's keybindings.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">action</span>
+            <span class="types"><span class="type">func[opt]</span></span>
+         Function to be executed after entering the modal.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dkb.modal:exit"></a>
+    <strong>dkb.modal:exit (action)</strong>
+    </dt>
+    <dd>
+    Exit modal.  Deactivates it's keybindings and restores previous ones.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">action</span>
+            <span class="types"><span class="type">func[opt]</span></span>
+         Function to be executed after exiting the modal.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "dkb.modal:exit"></a>
+    <strong>dkb.modal:exit (func, arg)</strong>
+    </dt>
+    <dd>
+    Execute a function with bind mode enabled.
+ This means that bindigns executed within the function will be bound
+ to the modal instead.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">func</span>
+            <span class="types"><span class="type">func</span></span>
+        ` Function to be executed.
+        </li>
+        <li><span class="parameter">arg</span>
+         Any extra argument will be passed to the provided function.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-10-20 17:40:23 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

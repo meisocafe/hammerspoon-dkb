@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Declarative Keybindings for Hammerspoon Documentation</title>
+    <link rel="stylesheet" href="../ldoc_fixed.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Declarative Keybindings</h1>
+
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/dkb.html">dkb</a></li>
+  <li><a href="../modules/dkb.exec.html">dkb.exec</a></li>
+  <li><strong>dkb.keybindings</strong></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/dkb.modal.html">dkb.modal</a></li>
+  <li><a href="../classes/dkb.toast.html">dkb.toast</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>dkb.keybindings</code></h1>
+<p>Module to set keybindings
+ This module is the base of dkb.</p>
+<p> You can use it by itself or together
+ with the other modules to produce very readable and self-documented
+ files of lua code that set-up the keybindings. See the examples below
+ for the recommended usage.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Bindings:bind">Bindings:bind (mods, key, action)</a></td>
+	<td class="summary">Bind mod+key to an action.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Bindings:bindmod">Bindings:bindmod (mods, action)</a></td>
+	<td class="summary">Returns a function that binds a key with a specific mod to a default action.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    Methods
+    <dl class="function">
+    <dt>
+    <a name = "Bindings:bind"></a>
+    <strong>Bindings:bind (mods, key, action)</strong>
+    </dt>
+    <dd>
+    Bind mod+key to an action.
+ It is recommended to use <a href="../modules/dkb.keybindings.html#Bindings:bindmod">Bindings:bindmod</a> instead.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mods</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+         String containing the necessary modifier. Same as supported by hs.hotkey.
+        </li>
+        <li><span class="parameter">key</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+         String representing the key to be mapped. See hs.keycodes.map.
+        </li>
+        <li><span class="parameter">action</span>
+            <span class="types"><span class="type">func</span></span>
+         Function to be executed when the keybinding is pressed.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/dkb.keybindings.html#Bindings:bindmod">Bindings:bindmod</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "Bindings:bindmod"></a>
+    <strong>Bindings:bindmod (mods, action)</strong>
+    </dt>
+    <dd>
+    Returns a function that binds a key with a specific mod to a default action.
+ The action can receive parameters or can be replaced with a provided one. This
+ allows for aliasing modifier combinations, making them easily identificable through
+ the code.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">mods</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+         String containing the necessary modifier. Same as supported by hs.hotkey.
+        </li>
+        <li><span class="parameter">action</span>
+            <span class="types"><span class="type">func</span></span>
+         Default function to be called if none are provided
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">func</span></span>
+        A function that can be used to declare mappings with the provided modifier
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">mod1 = keybindings:<span class="function-name">bindmod</span>(<span class="string">"⌃⌘"</span>, yabai.cmd)
+
+<span class="function-name">mod1</span>(<span class="string">"l"</span>, <span class="string">"window --focus east"</span>) <span class="comment">--&gt; Will execute yabai.cmd with provied argument
+</span><span class="function-name">mod1</span>(<span class="string">"p"</span>, <span class="global">print</span>, <span class="string">"key p pressed"</span>) <span class="comment">--&gt; Will print "key p pressed" when pressing ⌃⌘+p</span></pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
+<i style="float:right;">Last updated 2023-10-20 17:40:23 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
