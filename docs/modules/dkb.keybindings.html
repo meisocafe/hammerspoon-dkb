@@ -34,6 +34,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
+<li><a href="#Returned_functions">Returned functions </a></li>
 </ul>
 
 
@@ -45,6 +46,7 @@
 </ul>
 <h2>Classes</h2>
 <ul class="nowrap">
+  <li><a href="../classes/dkb.filter.html">dkb.filter</a></li>
   <li><a href="../classes/dkb.modal.html">dkb.modal</a></li>
   <li><a href="../classes/dkb.toast.html">dkb.toast</a></li>
 </ul>
@@ -65,12 +67,19 @@
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Bindings:bind">Bindings:bind (mods, key, action)</a></td>
+	<td class="name" nowrap><a href="#Bindings:bind">Bindings:bind (mods, key, action, options)</a></td>
 	<td class="summary">Bind mod+key to an action.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#Bindings:bindmod">Bindings:bindmod (mods, action)</a></td>
 	<td class="summary">Returns a function that binds a key with a specific mod to a default action.</td>
+	</tr>
+</table>
+<h2><a href="#Returned_functions">Returned functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Binding:bindmod:return">Binding:bindmod:return (key, action, arguments, options)</a></td>
+	<td class="summary">Function returned by Bindings:bindmod</td>
 	</tr>
 </table>
 
@@ -83,7 +92,7 @@
     <dl class="function">
     <dt>
     <a name = "Bindings:bind"></a>
-    <strong>Bindings:bind (mods, key, action)</strong>
+    <strong>Bindings:bind (mods, key, action, options)</strong>
     </dt>
     <dd>
     Bind mod+key to an action.
@@ -103,6 +112,23 @@
         <li><span class="parameter">action</span>
             <span class="types"><span class="type">func</span></span>
          Function to be executed when the keybinding is pressed.
+        </li>
+        <li><span class="parameter">options</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a></span>
+
+<p> Table containing the possible options. Defaults to function called on
+ press if an empty table is passed. Each option can accept a <code>bool</code> or <code>func</code>.
+ If <code>bool</code> is provied and true, action will be invoked. If <code>func</code> is provided, it will be
+ invoked instead.
+ Possible options are:</p>
+
+<ul>
+    <li><p><code>pressed</code>: defaults to <code>true</code></p></li>
+    <li><p><code>released</code>: defaults to <code>false</code></p></li>
+    <li><p><code>hold_repeat</code>: defaults to <code>false</code></p></li>
+</ul>
+
+
         </li>
     </ul>
 
@@ -142,10 +168,15 @@
     <ol>
 
            <span class="types"><span class="type">func</span></span>
-        A function that can be used to declare mappings with the provided modifier
+        Function be used to declare bindings with the provided mods and default_function
+ documented in <a href="../modules/dkb.keybindings.html#Binding:bindmod:return">Binding:bindmod:return</a>.
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/dkb.keybindings.html#Binding:bindmod:return">Binding:bindmod:return</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -157,13 +188,58 @@
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Returned_functions"></a>Returned functions </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Binding:bindmod:return"></a>
+    <strong>Binding:bindmod:return (key, action, arguments, options)</strong>
+    </dt>
+    <dd>
+    Function returned by Bindings:bindmod
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a></span>
+         String representing the key to be mapped. See hs.keycodes.map.
+        </li>
+        <li><span class="parameter">action</span>
+            <span class="types"><span class="type">func[opt]</span></span>
+         If provided as second argument, the provided function will be called
+ instead of the default_function.
+        </li>
+        <li><span class="parameter">arguments</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.4">string[opt]</a></span>
+         Each separate string will be passed in order as arguments to
+ either the default function or to action if provided as second param.
+        </li>
+        <li><span class="parameter">options</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.4/manual.html#6.6">table[opt]</a></span>
+         if last argument is a table, it will be interepreted as options
+ same as <a href="../modules/dkb.keybindings.html#Bindings:bind">Bindings:bind</a>.
+        </li>
+    </ul>
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../modules/dkb.keybindings.html#Bindings:bindmod">Bindings:bindmod</a></li>
+         <li><a href="../modules/dkb.keybindings.html#Bindings:bind">Bindings:bind</a></li>
+    </ul>
+
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/lunarmodules/LDoc">LDoc 1.5.0</a></i>
-<i style="float:right;">Last updated 2023-10-20 17:40:23 </i>
+<i style="float:right;">Last updated 2023-10-31 00:05:48 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

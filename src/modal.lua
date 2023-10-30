@@ -3,9 +3,14 @@
 -- Uses `hs.hotkey.modal` behind the scenes.
 -- Use it in combination with `dkb.keybindings` to easily define modals and bind keys
 -- to them.
+-- If you want to filter keybindings based on the focuse window, see `dkb.filter`.
+-- Nesting modals is possible, the one activated on top (later) will have precedence over 
+-- the previous one and so on. Nesting can get out of hand quickly so be sure you understand
+-- how it works if you want to get creative with it.
 --
 -- This module returns a `func` used to instantiate modals. See usage in the function below.
 -- @classmod dkb.modal
+-- @see dkb.filter
 
 local hotkey = require("hs.hotkey")
 local bindings = require("dkb.keybindings")
@@ -66,14 +71,14 @@ local function Modal(init_function)
         end
     end
 
-    --- Execute a function with bind mode enabled.
+    --- Execute a function with bindings enabled.
     -- This means that bindigns executed within the function will be bound
-    -- to the modal instead.
+    -- to the modal only.
     -- @tparam func `func` Function to be executed.
     -- @param arg Any extra argument will be passed to the provided function.
-    -- @function exit
+    -- @function bind
 
-    function self.with_bind_mode(func, ...)
+    function self.bind(func, ...)
         enable_bindings(true)
         func(...)
         enable_bindings(false)
@@ -83,7 +88,7 @@ local function Modal(init_function)
 
     -- Execute init function with bindings enabled if provided
     if init_function then
-        self.with_bind_mode(init_function, self)
+        self.bind(init_function, self)
     end
 
     return self
