@@ -1,3 +1,4 @@
+---@diagnostic disable: lowercase-global
 package = "meisocafe.hammerspoon.dkb"
 version = "0.1-0"
 source = {
